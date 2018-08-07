@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!--Importing all the required bootstrap files -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <link href="https://getbootstrap.com/docs/4.0/examples/floating-labels/floating-labels.css" rel="stylesheet">
+      <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href='static/legend.css' rel="stylesheet">
+      <title>Welcome!</title>
+   </head>
+   <body>
+      <div id="loading" style="width: 200px;height: 200px; display: none; background: url(/static/loadingimage.gif) no-repeat; cursor: wait;"></div>
+      <div id="content">
+         <!--       The below form code is from Bootstrap 4.0 elements  -->
+         <form class="form-signin" method="post" action="/sentiment_analysis">
+            <div class="text-center mb-4">
+               <img class="mb-4" src="https://logos-download.com/wp-content/uploads/2016/02/Twitter_logo_bird_transparent_png.png" alt="" width="150" height="125">
+               <h1 class="h3 mb-3 font-weight-normal">Enter a Topic to search!</h1>
+            </div>
+            <div class="form-label-group">
+               <input type="text" name="topicname" class="form-control" placeholder="Enter a Topic" autofocus required>
+               <label for="topicname">Topic</label>
+            </div>
+            <fieldset class="form-group">
+               <div class="row">
+                  <h4><span class="label label-default">Number of Tweets to retrieve:</span></h4>
+                  <legend class="col-form-label col-sm-2 pt-0"></legend>
+                  <div class="col-sm-10">
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="100">
+                        <label class="form-check-label" for="gridRadios1">
+                        100
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="200">
+                        <label class="form-check-label" for="gridRadios2">
+                        200
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="300">
+                        <label class="form-check-label" for="gridRadios3">
+                        300
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="400">
+                        <label class="form-check-label" for="gridRadios4">
+                        400
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="500">
+                        <label class="form-check-label" for="gridRadios5">
+                        500
+                        </label>
+                     </div>
+                  </div>
+               </div>
+            </fieldset>
+            <p></p>
+            <p></p>
+            <div>
+               <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="loading();">Search</button>
+            </div>
+         </form>
+         <script type="text/javascript">
+            function loading(){
+                $("#loading").show();
+                $("#content").hide();       
+            }
+         </script>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <title>Sentiment Analysis</title>
+      <!-- Importing all the necessary bootstrap files -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+      <script src='static/Chart.min.js'></script>
+      <link href='static/legend.css' rel="stylesheet">
+      <script src='static/Chart.min.js'></script>
+   </head>
+   <body>
+    <div id="loading" style="width: 800px;height: 200px; display: none; background: url(/static/loadingimage.gif) no-repeat; cursor: wait; position: fixed; margin: auto; top: 0; right: 0; bottom: 0; left: 10;"></div>
+      <div id="content">
+         <div class="container-fluid">
+            <div class="row">
+               <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                  <div class="sidebar-sticky">
+                     <ul class="nav flex-column">
+                        <li class="nav-item">
+                           <form id="sentiment_form" action="/sentiment_analysis_2">
+                              <a class="nav-link" id="sentiment_link">
+                              <span data-feather="home"></span>
+                              <button type="button" class="btn btn-info" id="Sentiment_button" onclick="loading();">Sentiment Analysis</button>
+                              </a>
+                           </form>
+                        </li>
+                        <li class="nav-item active">
+                           <form id="wordcloud_form" action="/wordcloud_analysis">
+                              <a class="nav-link">
+                              <span data-feather="file"></span>
+                              <button type="button" class="btn btn-info" id="wordcloud_button" onclick="loading();">Word-Cloud Analysis</button>
+                              </a>
+                           </form>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link">
+                           <span data-feather="shopping-cart"></span>
+                           <button type="button" class="btn btn-info" id="trend_button" >Trend Analysis</button>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </nav>
+               <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                     <h1 class="h2">Trend Analysis Dashboard</h1>
+                     <h3>Topic: {{ searchTerm }}</h3>
+                     <div class="btn-toolbar mb-2 mb-md-0">
+                     </div>
+                  </div>
+                  <div id="plot_div">
+                     <img src="data:image/png;base64, {{ plot_url_trend }}" id="plot" style="max-height:50%;max-width:50%">
+                  </div>
+                  <!--                <img src="https://78.media.tumblr.com/tumblr_m6wnecNK131qzs63fo1_1280.png" style="max-height:50%;max-width:50%">-->
+                  <h4><span class="badge badge-secondary">Trend Among Users!</span></h4>
+                  <div>
+                     <h4>Based on the topic provided, we observe the trend of the sentiment values obtained among the users (who searched for the same topic).</h4>
+                  </div>
+               </main>
+            </div>
+         </div>
+         <script>
+            window.onload = function() {
+                
+               check = '{{ redirect_value }}'
+                
+               if (check == "Back") {
+                   alert ("There is no available history for the given topic to observe trends. Going back to Sentiment Analysis Dashboard!");
+                   document.getElementById("sentiment_form").submit();
+               }
+            
+            };
+            
+            
+            document.getElementById("sentiment_link").onclick = function() {                
+                document.getElementById("sentiment_form").submit();
+                loading();
+            }
+            
+            document.getElementById("wordcloud_button").onclick = function() {
+                document.getElementById("wordcloud_form").submit();
+                loading();
+            }
+            
+            function loading(){
+               $("#loading").show();
+               $("#content").hide();       
+            }
+            
+         </script>
+      </div>
+   </body>
+</html>
